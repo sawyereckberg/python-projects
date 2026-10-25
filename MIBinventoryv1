@@ -1,0 +1,52 @@
+'''
+The purpose of this application is to inventory all computers at the MIB Location
+
+Authored by Sawyer Eckberg
+No AI was used in the making of this program
+'''
+
+inventory = {
+    '20260001':'Device info1',
+    '20260002':'Device info2',
+    '20260003':'Device info3',
+    '20260004':'Device info4',
+    '20260005':'Device info5'
+}
+
+user_input = input('''
+    What would you like to do? \n 
+    a. View inventory (all computers at MIB) \n 
+    b. Search for a computer at MIB \n
+    c. Add a computer(s) to the inventory \n
+    Press q to quit \n''')
+
+def view():
+    for pcn, info in inventory.items():
+        print(pcn + ': '+ info + '\n')
+
+
+def search():
+    req_pcn = input("Provide the PCN of the device you're looking for: ")
+
+    if req_pcn in inventory:
+        print(req_pcn + ': ' + inventory[req_pcn])
+    else:
+        print(f'{req_pcn} is not currently in our inventory.')
+
+def add():
+    new_pcn = input("Add the PCN of the new device: ")
+    new_info = input("Add the device info of the new device: ")
+    inventory = inventory[new_pcn] 
+    inventory = inventory[new_info]
+    
+
+def main():
+    if user_input == 'a':
+        view()
+    elif user_input == 'b':
+        search()
+    elif user_input == 'c':
+        add()
+
+
+main()
