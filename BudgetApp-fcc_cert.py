@@ -5,7 +5,7 @@ class Category:
         self.name = name
         self.ledger = []
         
-        
+       
     def deposit(self, amount, description=''):
         self.ledger.append({'amount': amount, 'description': description})
         self.balance += amount
@@ -34,9 +34,17 @@ class Category:
 
     def check_funds(self, amount):
         if amount > self.balance:
-            False
+            return False
         else:
             return True
+
+    def __str__(self):
+        return str(self)
+
+
+
+   
+        
         
         
         
@@ -78,7 +86,8 @@ clothing = Category('Clothing')
 food.transfer(50, clothing)
 clothing.deposit(1000, 'initial deposit')
 clothing.get_balance()
-print(type(food))
+print(food)
+
 
 
 
