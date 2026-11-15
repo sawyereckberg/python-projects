@@ -39,7 +39,38 @@ class Category:
             return True
 
     def __str__(self):
-        return str(self)
+    
+        if ((30 - len(self.name)) % 2) != 0:
+            left = (30 - len(self.name)) // 2
+            right = (30 - len(self.name)) - left
+            star_format = (str('*' * left + self.name + '*' * right))
+               
+        else:
+            stars = (30 - len(self.name)) // 2
+            star_format = (str('*' * stars + self.name + '*' * stars))
+            
+        list_format = []  
+        total_format = 'Total: ' + str(self.balance)   
+        for item in self.ledger:
+            if len(str(item['amount'])) > 7:
+                formatted_amount = f"{(str(item['amount'])[:8])}"
+            else:
+                formatted_amount = f"{(item['amount']):.2f}"
+                
+            if len(item['description']) > 23:
+                formatted_description = item['description'][:23]
+            else:
+                formatted_description = item['description']
+            space = 30 - (len(formatted_description) + len(formatted_amount))
+
+            list_format.append(formatted_description + ' ' * space + formatted_amount)
+            '\n'.join(list_format)
+
+
+        return star_format + '\n' + '\n'.join(list_format) + '\n' + total_format
+
+        
+        
 
 
 
@@ -86,7 +117,10 @@ clothing = Category('Clothing')
 food.transfer(50, clothing)
 clothing.deposit(1000, 'initial deposit')
 clothing.get_balance()
+#tests = Category('tests')
+#tests.deposit(1000, 'initial deposit')
 print(food)
+#print(food)
 
 
 
@@ -100,4 +134,38 @@ print(food)
 #Instance attribute: a specific trait that exists for every instance created from the class template
 #So if you create an instance of a class, that means youre using the template(class) and making a specific thing.
 #That thing you create will have an attribute, which is defined in the class.
+'''
+
+
+
+'''
+def __str__(self):
+    
+        if ((30 - len(self.name)) % 2) != 0:
+            left = (30 - len(self.name)) // 2
+            right = (30 - len(self.name)) - left
+            print(str('*' * left + self.name + '*' * right))
+            
+        else:
+            stars = (30 - len(self.name)) // 2
+            print(str('*' * stars + self.name + '*' * stars))
+            
+        for item in self.ledger:
+            if len(str(item['amount'])) > 7:
+                formatted_amount = f"{(str(item['amount'])[:8])}"
+            else:
+                formatted_amount = f"{(item['amount']):.2f}"
+            
+            
+            if len(item['description']) > 23:
+                formatted_description = item['description'][:23]
+            else:
+                formatted_description = item['description']
+            
+            space = 30 - (len(formatted_description) + len(formatted_amount))
+        
+            print(formatted_description + ' ' * space + formatted_amount)
+
+        return 'Total: ' + str(self.balance)
+
 '''
